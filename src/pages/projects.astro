@@ -32,7 +32,7 @@ const description = 'Orthomosaic drone mapping projects by Tom Finn, completed w
               <div class="card-body">
                 <p class="text-small" style="margin-bottom: 0.25rem;">{project.location}</p>
                 <h2 class="text-headline" style="margin-bottom: 0.5rem;">
-                  <a href={`/projects/${project.id}`}>{project.title}</a>
+                  <a href={withBase(`/projects/${project.id}`)}>{project.title}</a>
                 </h2>
                 <p class="text-body" style="font-size: 0.95rem; margin-bottom: 1.25rem;">{project.objective}</p>
 
