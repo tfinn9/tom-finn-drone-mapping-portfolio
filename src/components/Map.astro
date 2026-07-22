@@ -1,10 +1,14 @@
 ---
+import { withBase } from '../utils/paths.js';
+
 export interface Props {
   locations: Array<{ title: string; coordinates: number[] | null; link: string }>;
 }
 
 const { locations } = Astro.props;
-const validLocations = locations.filter((loc) => loc.coordinates && loc.coordinates.length >= 2);
+const validLocations = locations
+  .filter((loc) => loc.coordinates && loc.coordinates.length >= 2)
+  .map((loc) => ({ ...loc, link: withBase(loc.link) }));
 ---
 
 <div class="map-container" id="project-map" data-locations={JSON.stringify(validLocations)}>

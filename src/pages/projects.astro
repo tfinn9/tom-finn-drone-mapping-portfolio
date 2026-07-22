@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Map from '../components/Map.astro';
 import { projects } from '../data/projects.js';
+import { withBase } from '../utils/paths.js';
 
 const title = 'Projects — Tom Finn Drone Mapping Portfolio';
 const description = 'Orthomosaic drone mapping projects by Tom Finn, completed with DJI Mini 3 and WebODM for agriculture and field operations.';
@@ -25,8 +26,8 @@ const description = 'Orthomosaic drone mapping projects by Tom Finn, completed w
         <div class="project-grid">
           {projects.map((project, index) => (
             <article class="card fade-in" style={`transition-delay: ${150 + index * 50}ms;`}>
-              <div class="project-thumb" data-lightbox={project.fullResolution || project.preview} data-alt={`Full resolution orthomosaic for ${project.title}`} role="button" tabindex="0" aria-label={`Open full resolution orthomosaic for ${project.title}`}>
-                <img src={project.preview} alt={`Orthomosaic preview for ${project.title}`} loading="lazy" />
+              <div class="project-thumb" data-lightbox={withBase(project.fullResolution || project.preview)} data-alt={`Full resolution orthomosaic for ${project.title}`} role="button" tabindex="0" aria-label={`Open full resolution orthomosaic for ${project.title}`}>
+                <img src={withBase(project.preview)} alt={`Orthomosaic preview for ${project.title}`} loading="lazy" />
               </div>
               <div class="card-body">
                 <p class="text-small" style="margin-bottom: 0.25rem;">{project.location}</p>

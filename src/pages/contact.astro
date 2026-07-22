@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { withBase } from '../utils/paths.js';
 
 const title = 'Contact — Tom Finn Drone Mapping Portfolio';
 const description = 'Contact Tom Finn for drone mapping, field operations, and agricultural technology opportunities.';
@@ -63,7 +64,7 @@ const contact = {
             <span class="contact-card-value">github.com/tomfinn</span>
           </a>
 
-          <a href={contact.resume} download class="contact-card fade-in" style="transition-delay: 300ms;">
+          <a href={withBase(contact.resume)} download class="contact-card fade-in" style="transition-delay: 300ms;">
             <span class="contact-card-icon" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>

@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { withBase } from '../utils/paths.js';
 
 const title = 'Tom Finn — Drone Mapping & Field Operations';
 ---
@@ -19,8 +20,8 @@ const title = 'Tom Finn — Drone Mapping & Field Operations';
           “I enjoy using drones, mapping and technology to solve practical real-world problems. This portfolio showcases several orthomosaic mapping projects completed using a DJI Mini 3 and WebODM.”
         </p>
         <div class="hero-actions fade-in" style="transition-delay: 150ms;">
-          <a href="/projects" class="btn btn-primary btn-lg">View Projects</a>
-          <a href="/contact" class="btn btn-outline btn-lg">Get in touch</a>
+          <a href={withBase('/projects')} class="btn btn-primary btn-lg">View Projects</a>
+          <a href={withBase('/contact')} class="btn btn-outline btn-lg">Get in touch</a>
         </div>
       </div>
     </section>
