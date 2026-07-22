@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#d4e5d6" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="1000" fill="#c5d9a8"/>
+  <rect width="1600" height="1000" fill="url(#grid)"/>
+  <path d="M0 200 Q400 180 800 220 T1600 200 V1000 H0 Z" fill="#a8c686"/>
+  <path d="M200 0 Q220 300 200 600 T200 1000 H500 V0 Z" fill="#b8d096"/>
+  <ellipse cx="1100" cy="350" rx="180" ry="120" fill="#9ebf7a"/>
+  <circle cx="300" cy="800" r="60" fill="#8fb36d"/>
+  <path d="M1200 700 L1300 650 L1450 680 L1500 750 L1400 820 L1250 800 Z" fill="#7fa85e"/>
+  <path d="M50 50 L150 40 L200 100 L120 150 L30 120 Z" fill="#d4c49a"/>
+  <text x="80" y="920" font-family="monospace" font-size="32" fill="#4a5d4e" opacity="0.6">Placeholder orthomosaic — replace with your own image</text>
+</svg>

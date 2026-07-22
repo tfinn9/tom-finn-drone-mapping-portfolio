@@ -1,0 +1,45 @@
+---
+export interface Props {
+  locations: Array<{ title: string; coordinates: number[]; link: string }>;
+}
+
+const { locations } = Astro.props;
+---
+
+<div class="map-container" id="project-map" data-locations={JSON.stringify(locations)}>
+  <div class="map-placeholder">
+    <p class="text-body">Loading map…</p>
+  </div>
+</div>
+
+<script is:inline src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script is:inline>
+  (function () {
+    const container = document.getElementById('project-map');
+    if (!container || typeof window.L === 'undefined') return;
+
+    const locations = JSON.parse(container.dataset.locations || '[]');
+    if (!Array.isArray(locations) || locations.length === 0) return;
+
+    container.innerHTML = '';
+
+    const map = window.L.map(container, {
+      scrollWheelZoom: false,
+    }).setView(locations[0].coordinates, 6);
+
+    window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 18,
+    }).addTo(map);
+
+    locations.forEach(function (loc) {
+      const marker = window.L.marker(loc.coordinates).addTo(map);
+      marker.bindPopup('<a href="' + loc.link + '" style="color:#4a7c59;font-weight:600;">' + loc.title + '</a>');
+    });
+
+    if (locations.length > 1) {
+      const bounds = locations.map(function (l) { return l.coordinates; });
+      map.fitBounds(bounds, { padding: [40, 40], maxZoom: 10 });
+    }
+  })();
+</script>

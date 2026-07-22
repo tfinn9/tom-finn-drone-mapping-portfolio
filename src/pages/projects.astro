@@ -1,0 +1,149 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Map from '../components/Map.astro';
+import { projects } from '../data/projects.js';
+
+const title = 'Projects — Tom Finn Drone Mapping Portfolio';
+const description = 'Orthomosaic drone mapping projects by Tom Finn, completed with DJI Mini 3 and WebODM for agriculture and field operations.';
+---
+
+<Layout title={title} description={description}>
+  <Header />
+  <main id="main">
+    <section class="section">
+      <div class="container">
+        <p class="text-label fade-in">Projects</p>
+        <h1 class="text-title fade-in" style="transition-delay: 50ms; margin-bottom: 1rem;">
+          Orthomosaic mapping portfolio
+        </h1>
+        <p class="text-body fade-in" style="transition-delay: 100ms; max-width: 720px; margin-bottom: 3.5rem;">
+          Each project below follows the full workflow from mission planning to processed deliverable. Click any orthomosaic preview to open the full-resolution image.
+        </p>
+
+        <div class="project-grid">
+          {projects.map((project, index) => (
+            <article class="card fade-in" style={`transition-delay: ${150 + index * 50}ms;`}>
+              <div class="project-thumb" data-lightbox={project.preview} data-alt={`Orthomosaic preview for ${project.title}`} role="button" tabindex="0" aria-label={`Open full resolution orthomosaic for ${project.title}`}>
+                <img src={project.preview} alt={`Orthomosaic preview for ${project.title}`} loading="lazy" />
+              </div>
+              <div class="card-body">
+                <p class="text-small" style="margin-bottom: 0.25rem;">{project.location}</p>
+                <h2 class="text-headline" style="margin-bottom: 0.5rem;">
+                  <a href={`/projects/${project.id}`}>{project.title}</a>
+                </h2>
+                <p class="text-body" style="font-size: 0.95rem; margin-bottom: 1.25rem;">{project.objective}</p>
+
+                <div class="project-meta-grid">
+                  <div class="project-meta-item">
+                    <span class="project-meta-label">Aircraft</span>
+                    <span class="project-meta-value">{project.aircraft}</span>
+                  </div>
+                  <div class="project-meta-item">
+                    <span class="project-meta-label">Duration</span>
+                    <span class="project-meta-value">{project.missionDuration}</span>
+                  </div>
+                  <div class="project-meta-item">
+                    <span class="project-meta-label">Image Count</span>
+                    <span class="project-meta-value">{project.imageCount.toLocaleString()}</span>
+                  </div>
+                  <div class="project-meta-item">
+                    <span class="project-meta-label">Software</span>
+                    <span class="project-meta-value">{project.processingSoftware}</span>
+                  </div>
+                  <div class="project-meta-item">
+                    <span class="project-meta-label">Output Resolution</span>
+                    <span class="project-meta-value">{project.outputResolution}</span>
+                  </div>
+                  <div class="project-meta-item">
+                    <span class="project-meta-label">Altitude</span>
+                    <span class="project-meta-value">{project.flightAltitude}</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" aria-labelledby="map-heading">
+      <div class="container">
+        <div style="max-width: 640px; margin-bottom: 2rem;">
+          <p class="text-label fade-in">Locations</p>
+          <h2 id="map-heading" class="text-headline fade-in" style="transition-delay: 50ms;">
+            Project locations
+          </h2>
+        </div>
+        <div class="fade-in" style="transition-delay: 100ms;">
+          <Map locations={projects.map((p) => ({ title: p.title, coordinates: p.coordinates, link: `/projects/${p.id}` }))} />
+        </div>
+      </div>
+    </section>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Full resolution orthomosaic">
+      <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+      <img src="" alt="" id="lightbox-img" />
+    </div>
+  </main>
+  <Footer />
+
+  <script>
+    // @ts-nocheck
+    (function () {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      );
+      document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const closeBtn = lightbox?.querySelector('.lightbox-close');
+      if (!lightbox || !lightboxImg || !closeBtn) return;
+
+      function open(src, alt) {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt;
+        lightbox.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+      }
+
+      function close() {
+        lightbox.classList.remove('is-open');
+        lightboxImg.src = '';
+        lightboxImg.alt = '';
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('[data-lightbox]').forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+          open(trigger.dataset.lightbox, trigger.dataset.alt || '');
+        });
+        trigger.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            open(trigger.dataset.lightbox, trigger.dataset.alt || '');
+          }
+        });
+      });
+
+      closeBtn.addEventListener('click', close);
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) close();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('is-open')) close();
+      });
+    })();
+  </script>
+</Layout>

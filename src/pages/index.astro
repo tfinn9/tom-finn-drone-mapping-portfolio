@@ -1,0 +1,93 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const title = 'Tom Finn — Drone Mapping & Field Operations';
+---
+
+<Layout title={title}>
+  <Header />
+  <main id="main">
+    <section class="hero">
+      <div class="container">
+        <p class="text-label hero-label fade-in">Portfolio</p>
+        <h1 class="text-display hero-title fade-in" style="transition-delay: 50ms;">
+          Drone Mapping &amp; Field Operations
+        </h1>
+        <p class="hero-subtitle fade-in" style="transition-delay: 100ms;">
+          “I enjoy using drones, mapping and technology to solve practical real-world problems. This portfolio showcases several orthomosaic mapping projects completed using a DJI Mini 3 and WebODM.”
+        </p>
+        <div class="hero-actions fade-in" style="transition-delay: 150ms;">
+          <a href="/projects" class="btn btn-primary btn-lg">View Projects</a>
+          <a href="/contact" class="btn btn-outline btn-lg">Get in touch</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" aria-labelledby="capability-heading">
+      <div class="container">
+        <div style="max-width: 640px; margin-bottom: 3rem;">
+          <p class="text-label fade-in">Capabilities</p>
+          <h2 id="capability-heading" class="text-title fade-in" style="transition-delay: 50ms;">
+            Built for agricultural operations
+          </h2>
+          <p class="text-body fade-in" style="transition-delay: 100ms;">
+            From flight planning to processed deliverables, I manage the complete drone mapping workflow for paddocks, vineyards, and rural infrastructure.
+          </p>
+        </div>
+
+        <div class="project-grid">
+          <article class="card fade-in" style="transition-delay: 150ms;">
+            <div class="card-body">
+              <p class="text-label" style="margin-bottom: 0.75rem;">01</p>
+              <h3 class="text-headline">Mission planning</h3>
+              <p class="text-body" style="margin-top: 0.75rem;">
+                Automated grid flights with altitude and overlap tuned for the terrain, weather, and required ground sample distance.
+              </p>
+            </div>
+          </article>
+
+          <article class="card fade-in" style="transition-delay: 200ms;">
+            <div class="card-body">
+              <p class="text-label" style="margin-bottom: 0.75rem;">02</p>
+              <h3 class="text-headline">Image acquisition</h3>
+              <p class="text-body" style="margin-top: 0.75rem;">
+                Consistent capture with the DJI Mini 3, geotagged imagery, and real-time flight monitoring for data quality.
+              </p>
+            </div>
+          </article>
+
+          <article class="card fade-in" style="transition-delay: 250ms;">
+            <div class="card-body">
+              <p class="text-label" style="margin-bottom: 0.75rem;">03</p>
+              <h3 class="text-headline">Photogrammetry</h3>
+              <p class="text-body" style="margin-top: 0.75rem;">
+                Processing with WebODM to produce orthomosaics, digital elevation models, and point clouds for analysis.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+
+  <script>
+    (function () {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      );
+
+      document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+    })();
+  </script>
+</Layout>

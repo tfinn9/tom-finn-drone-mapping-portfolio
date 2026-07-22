@@ -1,0 +1,238 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { projects } from '../../data/projects.js';
+
+export function getStaticPaths() {
+  return projects.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const title = `${project.title} — Tom Finn Drone Mapping Portfolio`;
+---
+
+<Layout title={title}>
+  <Header />
+  <main id="main">
+    <article class="section">
+      <div class="container">
+        <p class="text-label fade-in">{project.location}</p>
+        <h1 class="text-title fade-in" style="transition-delay: 50ms; margin-block: 0.75rem 1.5rem;">
+          {project.title}
+        </h1>
+        <p class="text-body fade-in" style="transition-delay: 100ms; max-width: 800px; font-size: 1.1rem;">
+          {project.objective}
+        </p>
+
+        <div class="project-thumb fade-in" style="transition-delay: 150ms; margin-block: 3rem; border-radius: var(--radius-lg);" data-lightbox={project.preview} data-alt={`Full orthomosaic for ${project.title}`} role="button" tabindex="0" aria-label={`Open full resolution orthomosaic for ${project.title}`}>
+          <img src={project.preview} alt={`Orthomosaic preview for ${project.title}`} loading="eager" />
+        </div>
+
+        <div class="card fade-in" style="transition-delay: 200ms;">
+          <div class="card-body">
+            <h2 class="text-headline" style="margin-bottom: 1rem;">Mission details</h2>
+            <table class="meta-table">
+              <tbody>
+                <tr>
+                  <th>Location</th>
+                  <td>{project.location}</td>
+                </tr>
+                <tr>
+                  <th>Mission objective</th>
+                  <td>{project.objective}</td>
+                </tr>
+                <tr>
+                  <th>Drone used</th>
+                  <td>{project.drone}</td>
+                </tr>
+                <tr>
+                  <th>Software used</th>
+                  <td>{project.software}</td>
+                </tr>
+                <tr>
+                  <th>Flight altitude</th>
+                  <td>{project.flightAltitude}</td>
+                </tr>
+                <tr>
+                  <th>Number of photos</th>
+                  <td>{project.numberOfPhotos.toLocaleString()}</td>
+                </tr>
+                <tr>
+                  <th>Mission duration</th>
+                  <td>{project.missionDuration}</td>
+                </tr>
+                <tr>
+                  <th>Output resolution</th>
+                  <td>{project.outputResolution}</td>
+                </tr>
+                <tr>
+                  <th>Weather conditions</th>
+                  <td>{project.weatherConditions}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card fade-in" style="transition-delay: 250ms; margin-top: 1.5rem;">
+          <div class="card-body">
+            <h2 class="text-headline" style="margin-bottom: 1rem;">Processing workflow</h2>
+            <p class="text-body">{project.processingWorkflow}</p>
+          </div>
+        </div>
+
+        <div class="card fade-in" style="transition-delay: 300ms; margin-top: 1.5rem;">
+          <div class="card-body">
+            <h2 class="text-headline" style="margin-bottom: 1rem;">Challenges</h2>
+            <p class="text-body">{project.challenges}</p>
+          </div>
+        </div>
+
+        <div class="card fade-in" style="transition-delay: 350ms; margin-top: 1.5rem;">
+          <div class="card-body">
+            <h2 class="text-headline" style="margin-bottom: 1rem;">Lessons learned</h2>
+            <p class="text-body">{project.lessonsLearned}</p>
+          </div>
+        </div>
+
+        <hr class="divider" />
+
+        <section class="fade-in" aria-labelledby="comparison-heading">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
+            <h2 id="comparison-heading" class="text-headline">Before &amp; after</h2>
+            <span class="text-small">Drag the slider to compare raw aerial imagery with the finished orthomosaic</span>
+          </div>
+          <div class="comparison" role="img" aria-label="Comparison between raw aerial imagery and finished orthomosaic" data-raw={project.raw} data-processed={project.preview}>
+            <img src={project.preview} alt="Finished orthomosaic" />
+            <div class="comparison-overlay" style="width: 50%;">
+              <img src={project.raw} alt="Raw aerial imagery" />
+            </div>
+            <div class="comparison-handle" style="left: 50%;" role="slider" aria-label="Compare raw and processed imagery" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" tabindex="0"></div>
+            <div class="comparison-labels">
+              <span class="comparison-label">Raw imagery</span>
+              <span class="comparison-label">Orthomosaic</span>
+            </div>
+          </div>
+        </section>
+
+        <div style="margin-top: 2.5rem;">
+          <a href="/projects" class="btn btn-secondary">← Back to projects</a>
+        </div>
+      </div>
+    </article>
+  </main>
+  <Footer />
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Full resolution orthomosaic">
+    <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+    <img src="" alt="" id="lightbox-img" />
+  </div>
+
+  <script>
+    // @ts-nocheck
+    (function () {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+      );
+      document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const closeBtn = lightbox?.querySelector('.lightbox-close');
+      if (lightbox && lightboxImg && closeBtn) {
+        function open(src, alt) {
+          lightboxImg.src = src;
+          lightboxImg.alt = alt;
+          lightbox.classList.add('is-open');
+          document.body.style.overflow = 'hidden';
+          closeBtn.focus();
+        }
+        function close() {
+          lightbox.classList.remove('is-open');
+          lightboxImg.src = '';
+          lightboxImg.alt = '';
+          document.body.style.overflow = '';
+        }
+        const thumb = document.querySelector('[data-lightbox]');
+        if (thumb) {
+          thumb.addEventListener('click', () => open(thumb.dataset.lightbox, thumb.dataset.alt || ''));
+          thumb.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              open(thumb.dataset.lightbox, thumb.dataset.alt || '');
+            }
+          });
+        }
+        closeBtn.addEventListener('click', close);
+        lightbox.addEventListener('click', (e) => { if (e.target === lightbox) close(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lightbox.classList.contains('is-open')) close(); });
+      }
+
+      const comparisons = document.querySelectorAll('.comparison');
+      comparisons.forEach((container) => {
+        const overlay = container.querySelector('.comparison-overlay');
+        const handle = container.querySelector('.comparison-handle');
+        if (!overlay || !handle) return;
+
+        function setPct(pct) {
+          pct = Math.max(0, Math.min(100, pct));
+          overlay.style.width = pct + '%';
+          handle.style.left = pct + '%';
+          handle.setAttribute('aria-valuenow', String(Math.round(pct)));
+        }
+
+        function update(clientX) {
+          const rect = container.getBoundingClientRect();
+          setPct(((clientX - rect.left) / rect.width) * 100);
+        }
+
+        let dragging = false;
+        handle.addEventListener('mousedown', () => dragging = true);
+        container.addEventListener('mousedown', (e) => {
+          dragging = true;
+          update(e.clientX);
+        });
+        window.addEventListener('mousemove', (e) => { if (dragging) update(e.clientX); });
+        window.addEventListener('mouseup', () => dragging = false);
+
+        handle.addEventListener('touchstart', (e) => { dragging = true; e.preventDefault(); });
+        container.addEventListener('touchstart', (e) => {
+          dragging = true;
+          update(e.touches[0].clientX);
+        }, { passive: true });
+        window.addEventListener('touchmove', (e) => { if (dragging) update(e.touches[0].clientX); }, { passive: true });
+        window.addEventListener('touchend', () => dragging = false);
+
+        handle.addEventListener('keydown', (e) => {
+          const step = 5;
+          const current = parseFloat(handle.getAttribute('aria-valuenow') || '50');
+          if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+            e.preventDefault();
+            setPct(current - step);
+          } else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+            e.preventDefault();
+            setPct(current + step);
+          } else if (e.key === 'Home') {
+            e.preventDefault();
+            setPct(0);
+          } else if (e.key === 'End') {
+            e.preventDefault();
+            setPct(100);
+          }
+        });
+      });
+    })();
+  </script>
+</Layout>

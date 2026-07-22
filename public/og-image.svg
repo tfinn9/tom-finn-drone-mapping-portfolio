@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f7faf7"/>
+  <rect x="80" y="80" width="1040" height="470" rx="24" fill="#ffffff" stroke="#e8f0e9" stroke-width="2"/>
+  <text x="120" y="260" font-family="system-ui, -apple-system, sans-serif" font-size="72" font-weight="700" fill="#1a2e1f">Tom Finn</text>
+  <text x="120" y="340" font-family="system-ui, -apple-system, sans-serif" font-size="40" font-weight="400" fill="#4a7c59">Drone Mapping &amp; Field Operations</text>
+  <text x="120" y="410" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="400" fill="#5a6b5e">Orthomosaic mapping with DJI Mini 3 &amp; WebODM</text>
+  <circle cx="1000" cy="280" r="110" fill="#e8f0e9"/>
+  <g transform="translate(960, 240)" fill="none" stroke="#4a7c59" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="40" cy="40" r="22"/>
+    <path d="M16 10h48M16 70h48M26 10v14M54 10v14M26 56v14M54 56v14"/>
+  </g>
+</svg>
