@@ -1,12 +1,13 @@
 ---
 export interface Props {
-  locations: Array<{ title: string; coordinates: number[]; link: string }>;
+  locations: Array<{ title: string; coordinates: number[] | null; link: string }>;
 }
 
 const { locations } = Astro.props;
+const validLocations = locations.filter((loc) => loc.coordinates && loc.coordinates.length >= 2);
 ---
 
-<div class="map-container" id="project-map" data-locations={JSON.stringify(locations)}>
+<div class="map-container" id="project-map" data-locations={JSON.stringify(validLocations)}>
   <div class="map-placeholder">
     <p class="text-body">Loading map…</p>
   </div>
@@ -19,7 +20,10 @@ const { locations } = Astro.props;
     if (!container || typeof window.L === 'undefined') return;
 
     const locations = JSON.parse(container.dataset.locations || '[]');
-    if (!Array.isArray(locations) || locations.length === 0) return;
+    if (!Array.isArray(locations) || locations.length === 0) {
+      container.innerHTML = '<div class="map-placeholder"><p class="text-body">Project locations will appear here once coordinates are added.</p></div>';
+      return;
+    }
 
     container.innerHTML = '';
 

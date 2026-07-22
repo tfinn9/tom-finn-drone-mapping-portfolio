@@ -1,7 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
-  <rect width="800" height="500" fill="#e8f0e9"/>
-  <g fill="none" stroke="#9cb89e" stroke-width="1.5" opacity="0.7">
-    <path d="M100 40 L120 460 M200 25 L220 475 M300 35 L320 465 M400 20 L420 480 M500 40 L520 460 M600 30 L620 470 M700 40 L720 450"/>
-  </g>
-  <text x="40" y="460" font-family="monospace" font-size="20" fill="#5a6b5e">Raw aerial frame — replace with your own image</text>
-</svg>

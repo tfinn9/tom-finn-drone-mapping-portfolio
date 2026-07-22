@@ -4,6 +4,9 @@ node_modules/
 # Build output
 dist/
 
+# Source orthomaps (deployed copies are in public/)
+orthomaps/
+
 # OS files
 .DS_Store
 Thumbs.db
