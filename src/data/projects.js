@@ -2,9 +2,9 @@ export const projects = [
   {
     id: 'estuary-shoreline-10-june-2026',
     title: 'Estuary Shoreline Survey',
-    location: 'New Zealand',
+    location: 'South New Brighton Park, Christchurch, New Zealand',
     date: '10 June 2026',
-    coordinates: null,
+    coordinates: [-43.53, 172.735],
     objective: 'Produce a high-resolution orthomosaic of the estuary shoreline to support environmental monitoring, shoreline change analysis, and coastal management planning.',
     drone: 'DJI Mini 3',
     aircraft: 'DJI Mini 3',
@@ -30,9 +30,9 @@ export const projects = [
   {
     id: 'jellicoe-street-31-march-2026',
     title: 'Jellicoe Street Survey',
-    location: 'Auckland, New Zealand',
+    location: 'South New Brighton Park, Christchurch, New Zealand',
     date: '31 March 2026',
-    coordinates: [-36.842, 174.763],
+    coordinates: [-43.53, 172.735],
     objective: 'Capture a detailed orthomosaic of the Jellicoe Street area for urban asset inspection, site documentation, and spatial measurements.',
     drone: 'DJI Mini 3',
     aircraft: 'DJI Mini 3',

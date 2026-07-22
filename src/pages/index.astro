@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Map from '../components/Map.astro';
+import { projects } from '../data/projects.js';
 import { withBase } from '../utils/paths.js';
 
 const title = 'Tom Finn — Drone Mapping & Field Operations';
@@ -10,71 +12,226 @@ const title = 'Tom Finn — Drone Mapping & Field Operations';
 <Layout title={title}>
   <Header />
   <main id="main">
-    <section class="hero">
+    <section class="hero" id="hero">
       <div class="container">
-        <p class="text-label hero-label fade-in">Portfolio</p>
+        <p class="text-label hero-label fade-in">Christchurch, New Zealand</p>
         <h1 class="text-display hero-title fade-in" style="transition-delay: 50ms;">
-          Drone Mapping &amp; Field Operations
+          Drone Mapping • Operations • Customer Success
         </h1>
         <p class="hero-subtitle fade-in" style="transition-delay: 100ms;">
-          “I enjoy using drones, mapping and technology to solve practical real-world problems. This portfolio showcases several orthomosaic mapping projects completed using a DJI Mini 3 and WebODM.”
+          9+ years solving technical problems, building customer relationships and running operations independently. Currently building hands-on drone mapping experience with DJI Mini 3 and WebODM for agriculture and rural technology.
         </p>
         <div class="hero-actions fade-in" style="transition-delay: 150ms;">
-          <a href={withBase('/projects')} class="btn btn-primary btn-lg">View Projects</a>
-          <a href={withBase('/contact')} class="btn btn-outline btn-lg">Get in touch</a>
+          <a href="#projects" class="btn btn-primary btn-lg">View Projects</a>
+          <a href="#contact" class="btn btn-outline btn-lg">Get in touch</a>
         </div>
       </div>
     </section>
 
-    <section class="section section-alt" aria-labelledby="capability-heading">
+    <section class="section" id="about" aria-labelledby="about-heading">
       <div class="container">
-        <div style="max-width: 640px; margin-bottom: 3rem;">
-          <p class="text-label fade-in">Capabilities</p>
-          <h2 id="capability-heading" class="text-title fade-in" style="transition-delay: 50ms;">
-            Built for agricultural operations
+        <div style="max-width: 760px;">
+          <p class="text-label fade-in">About</p>
+          <h2 id="about-heading" class="text-title fade-in" style="transition-delay: 50ms; margin-block: 1rem 1.5rem;">
+            Tom Finn
           </h2>
-          <p class="text-body fade-in" style="transition-delay: 100ms;">
-            From flight planning to processed deliverables, I manage the complete drone mapping workflow for paddocks, vineyards, and rural infrastructure.
+          <p class="text-body fade-in" style="transition-delay: 100ms; font-size: 1.1rem;">
+            Technology-focused field professional based in Christchurch, New Zealand, with 9+ years solving technical problems, building trusted customer relationships and working independently. Background combines customer success, business ownership and hands-on drone mapping using DJI Mini 3 and WebODM workflows.
+          </p>
+          <p class="text-body fade-in" style="transition-delay: 150ms; font-size: 1.1rem;">
+            Known for being practical, organised and calm under pressure, with a genuine interest in agricultural technology. Through 8+ years in customer success at Space Squirrel, diagnosed complex technical issues and coordinated with engineers in a remote environment. As founder of Herrick Creek Distillery, managed production, logistics, compliance and stakeholder relationships.
+          </p>
+          <p class="text-body fade-in" style="transition-delay: 200ms; font-size: 1.1rem;">
+            Over the past year has built a growing portfolio of drone mapping projects, developing skills in flight planning, autonomous missions, photogrammetry and quality checking orthomosaic outputs. Holds a full New Zealand driver licence and is excited to contribute accurate, high-quality mapping that supports successful farm deployments.
           </p>
         </div>
 
+        <h3 class="text-headline fade-in" style="margin-top: 3rem; margin-bottom: 1.5rem;">Highlights</h3>
         <div class="project-grid">
           <article class="card fade-in" style="transition-delay: 150ms;">
             <div class="card-body">
-              <p class="text-label" style="margin-bottom: 0.75rem;">01</p>
-              <h3 class="text-headline">Mission planning</h3>
-              <p class="text-body" style="margin-top: 0.75rem;">
-                Automated grid flights with altitude and overlap tuned for the terrain, weather, and required ground sample distance.
-              </p>
+              <h4 class="text-headline" style="font-size: 1.1rem; margin-bottom: 0.5rem;">Customer success</h4>
+              <p class="text-body">8+ years building long-term customer relationships and resolving complex technical issues.</p>
             </div>
           </article>
 
           <article class="card fade-in" style="transition-delay: 200ms;">
             <div class="card-body">
-              <p class="text-label" style="margin-bottom: 0.75rem;">02</p>
-              <h3 class="text-headline">Image acquisition</h3>
-              <p class="text-body" style="margin-top: 0.75rem;">
-                Consistent capture with the DJI Mini 3, geotagged imagery, and real-time flight monitoring for data quality.
-              </p>
+              <h4 class="text-headline" style="font-size: 1.1rem; margin-bottom: 0.5rem;">Drone operations</h4>
+              <p class="text-body">DJI Mini 3 pilot with autonomous mapping mission planning and aerial imagery capture.</p>
             </div>
           </article>
 
           <article class="card fade-in" style="transition-delay: 250ms;">
             <div class="card-body">
-              <p class="text-label" style="margin-bottom: 0.75rem;">03</p>
-              <h3 class="text-headline">Photogrammetry</h3>
-              <p class="text-body" style="margin-top: 0.75rem;">
-                Processing with WebODM to produce orthomosaics, digital elevation models, and point clouds for analysis.
-              </p>
+              <h4 class="text-headline" style="font-size: 1.1rem; margin-bottom: 0.5rem;">Photogrammetry</h4>
+              <p class="text-body">WebODM processing, orthomosaic generation and quality checking outputs.</p>
+            </div>
+          </article>
+
+          <article class="card fade-in" style="transition-delay: 300ms;">
+            <div class="card-body">
+              <h4 class="text-headline" style="font-size: 1.1rem; margin-bottom: 0.5rem;">Operations</h4>
+              <p class="text-body">Business owner experience across planning, logistics, compliance and independent field work.</p>
+            </div>
+          </article>
+
+          <article class="card fade-in" style="transition-delay: 350ms;">
+            <div class="card-body">
+              <h4 class="text-headline" style="font-size: 1.1rem; margin-bottom: 0.5rem;">Communication</h4>
+              <p class="text-body">Strong communicator with technical and non-technical customers and stakeholders.</p>
+            </div>
+          </article>
+
+          <article class="card fade-in" style="transition-delay: 400ms;">
+            <div class="card-body">
+              <h4 class="text-headline" style="font-size: 1.1rem; margin-bottom: 0.5rem;">Technology</h4>
+              <p class="text-body">GIS fundamentals, software troubleshooting, process improvement and Shopify experience.</p>
             </div>
           </article>
         </div>
       </div>
     </section>
+
+    <section class="section section-alt" id="projects" aria-labelledby="projects-heading">
+      <div class="container">
+        <div style="max-width: 720px; margin-bottom: 2.5rem;">
+          <p class="text-label fade-in">Projects</p>
+          <h2 id="projects-heading" class="text-title fade-in" style="transition-delay: 50ms;">
+            Orthomosaic mapping portfolio
+          </h2>
+          <p class="text-body fade-in" style="transition-delay: 100ms;">
+            Each project follows the full workflow from mission planning to processed deliverable. Click any orthomosaic preview to open the full-resolution image, or download the WebODM quality report.
+          </p>
+        </div>
+
+        <div class="project-grid">
+          {projects.map((project, index) => (
+            <article class="card fade-in" id={project.id} style={`transition-delay: ${150 + index * 75}ms;`}>
+              <div class="project-thumb" data-lightbox={withBase(project.fullResolution || project.preview)} data-alt={`Full resolution orthomosaic for ${project.title}`} role="button" tabindex="0" aria-label={`Open full resolution orthomosaic for ${project.title}`}>
+                <img src={withBase(project.preview)} alt={`Orthomosaic preview for ${project.title}`} loading="lazy" />
+              </div>
+              <div class="card-body">
+                <p class="text-small" style="margin-bottom: 0.25rem;">{project.location} · {project.date}</p>
+                <h3 class="text-headline" style="margin-bottom: 0.5rem;">{project.title}</h3>
+                <p class="text-body" style="font-size: 0.95rem; margin-bottom: 1.25rem;">{project.objective}</p>
+
+                <div class="project-meta-grid">
+                  <div class="project-meta-item">
+                    <span class="project-meta-label">Aircraft</span>
+                    <span class="project-meta-value">{project.aircraft}</span>
+                  </div>
+                  <div class="project-meta-item">
+                    <span class="project-meta-label">Duration</span>
+                    <span class="project-meta-value">{project.missionDuration}</span>
+                  </div>
+                  <div class="project-meta-item">
+                    <span class="project-meta-label">Images</span>
+                    <span class="project-meta-value">{project.imageCount.toLocaleString()}</span>
+                  </div>
+                  <div class="project-meta-item">
+                    <span class="project-meta-label">Altitude</span>
+                    <span class="project-meta-value">{project.flightAltitude}</span>
+                  </div>
+                  <div class="project-meta-item">
+                    <span class="project-meta-label">Resolution</span>
+                    <span class="project-meta-value">{project.outputResolution}</span>
+                  </div>
+                  <div class="project-meta-item">
+                    <span class="project-meta-label">Software</span>
+                    <span class="project-meta-value">{project.processingSoftware}</span>
+                  </div>
+                </div>
+
+                <div style="margin-top: 1.25rem;">
+                  <a href={withBase(project.report)} download class="btn btn-primary">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                      <polyline points="7 10 12 15 17 10"/>
+                      <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    Download Quality Report
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="map-heading">
+      <div class="container">
+        <div style="max-width: 640px; margin-bottom: 2rem;">
+          <p class="text-label fade-in">Locations</p>
+          <h2 id="map-heading" class="text-headline fade-in" style="transition-delay: 50ms;">
+            Project locations
+          </h2>
+        </div>
+        <div class="fade-in" style="transition-delay: 100ms;">
+          <Map locations={projects.map((p) => ({ title: p.title, coordinates: p.coordinates, link: `#${p.id}` }))} />
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="contact" aria-labelledby="contact-heading">
+      <div class="container">
+        <div style="max-width: 720px;">
+          <p class="text-label fade-in">Contact</p>
+          <h2 id="contact-heading" class="text-title fade-in" style="transition-delay: 50ms; margin-block: 1rem 1.5rem;">
+            Let’s talk about field operations
+          </h2>
+          <p class="text-body fade-in" style="transition-delay: 100ms;">
+            I am currently looking for a Drone Mapping Specialist role where I can combine fieldwork, mapping and technology to support agricultural operations. Reach out by email, phone or LinkedIn.
+          </p>
+        </div>
+
+        <div class="contact-grid" style="margin-block: 3rem;">
+          <a href="mailto:twfinn@live.ca" class="contact-card fade-in" style="transition-delay: 150ms;">
+            <span class="contact-card-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <path d="M22 7l-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+              </svg>
+            </span>
+            <span class="contact-card-title">Email</span>
+            <span class="contact-card-value">twfinn@live.ca</span>
+          </a>
+
+          <a href="tel:0223970772" class="contact-card fade-in" style="transition-delay: 200ms;">
+            <span class="contact-card-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </span>
+            <span class="contact-card-title">Phone</span>
+            <span class="contact-card-value">022 397 0772</span>
+          </a>
+
+          <a href="https://www.linkedin.com/in/tomwfinn" target="_blank" rel="noopener noreferrer" class="contact-card fade-in" style="transition-delay: 250ms;">
+            <span class="contact-card-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                <rect x="2" y="9" width="4" height="12"/>
+                <circle cx="4" cy="4" r="2"/>
+              </svg>
+            </span>
+            <span class="contact-card-title">LinkedIn</span>
+            <span class="contact-card-value">linkedin.com/in/tomwfinn</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Full resolution orthomosaic">
+      <button class="lightbox-close" aria-label="Close lightbox">&times;</button>
+      <img src="" alt="" id="lightbox-img" />
+    </div>
   </main>
   <Footer />
 
   <script>
+    // @ts-nocheck
     (function () {
       const observer = new IntersectionObserver(
         (entries) => {
@@ -87,8 +244,47 @@ const title = 'Tom Finn — Drone Mapping & Field Operations';
         },
         { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
       );
-
       document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const closeBtn = lightbox?.querySelector('.lightbox-close');
+      if (!lightbox || !lightboxImg || !closeBtn) return;
+
+      function open(src, alt) {
+        lightboxImg.src = src;
+        lightboxImg.alt = alt;
+        lightbox.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+        closeBtn.focus();
+      }
+
+      function close() {
+        lightbox.classList.remove('is-open');
+        lightboxImg.src = '';
+        lightboxImg.alt = '';
+        document.body.style.overflow = '';
+      }
+
+      document.querySelectorAll('[data-lightbox]').forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+          open(trigger.dataset.lightbox, trigger.dataset.alt || '');
+        });
+        trigger.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            open(trigger.dataset.lightbox, trigger.dataset.alt || '');
+          }
+        });
+      });
+
+      closeBtn.addEventListener('click', close);
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) close();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('is-open')) close();
+      });
     })();
   </script>
 </Layout>
