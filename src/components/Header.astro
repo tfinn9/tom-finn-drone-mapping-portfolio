@@ -1,14 +1,21 @@
 ---
+import { withBase } from '../utils/paths.js';
+
+const homePath = withBase('/').replace(/\/$/, '') || '/';
+const currentPath = Astro.url.pathname.replace(/\/$/, '');
+const isHome = currentPath === homePath;
+
 const navItems = [
-  { href: '#about', label: 'About' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#contact', label: 'Contact' },
+  { href: isHome ? '#about' : withBase('/#about'), label: 'About' },
+  { href: isHome ? '#projects' : withBase('/#projects'), label: 'Projects' },
+  { href: isHome ? '#contact' : withBase('/#contact'), label: 'Contact' },
+  { href: withBase('/why-halter/'), label: 'Why Halter?' },
 ];
 ---
 
 <header class="site-header">
   <div class="container">
-    <a href="#" class="logo" aria-label="Tom Finn home">
+    <a href={isHome ? '#' : withBase('/')} class="logo" aria-label="Tom Finn home">
       <svg class="logo-mark" viewBox="0 0 100 100" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="50" cy="50" r="16"/>
         <path d="M20 24h60M20 76h60M34 24v12M66 24v12M34 64v12M66 64v12"/>
