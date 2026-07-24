@@ -106,13 +106,15 @@ const title = 'Tom Finn — Drone Mapping & Field Operations';
 
         <div class="project-grid">
           {projects.map((project, index) => (
-            <article class="card fade-in" id={project.id} style={`transition-delay: ${150 + index * 75}ms;`}>
+            <article class:list={["card", "project-card", { "project-card-featured": project.featured }, "fade-in"]} id={project.id} style={`transition-delay: ${150 + index * 75}ms;`}>
               <div class="project-thumb" data-lightbox={withBase(project.fullResolution || project.preview)} data-alt={`Full resolution orthomosaic for ${project.title}`} role="button" tabindex="0" aria-label={`Open full resolution orthomosaic for ${project.title}`}>
+                {project.featured && <span class="project-featured-label">Featured large-area survey</span>}
                 <img src={withBase(project.preview)} alt={`Orthomosaic preview for ${project.title}`} loading="lazy" />
               </div>
               <div class="card-body">
                 <p class="text-small" style="margin-bottom: 0.25rem;">{project.location} · {project.date}</p>
                 <h3 class="text-headline" style="margin-bottom: 0.5rem;">{project.title}</h3>
+                {project.scaleHighlight && <p class="project-scale-highlight">{project.scaleHighlight}</p>}
                 <p class="text-body" style="font-size: 0.95rem; margin-bottom: 1.25rem;">{project.objective}</p>
                 <p class="text-body" style="font-size: 0.95rem; margin-bottom: 1.25rem;">
                   <strong>What I learned:</strong> {project.lessonsLearned}
@@ -143,6 +145,18 @@ const title = 'Tom Finn — Drone Mapping & Field Operations';
                     <span class="project-meta-label">Software</span>
                     <span class="project-meta-value">{project.processingSoftware}</span>
                   </div>
+                  {project.areaCovered && (
+                    <div class="project-meta-item">
+                      <span class="project-meta-label">Area mapped</span>
+                      <span class="project-meta-value">{project.areaCovered}</span>
+                    </div>
+                  )}
+                  {project.reconstructedImages && (
+                    <div class="project-meta-item">
+                      <span class="project-meta-label">Reconstruction</span>
+                      <span class="project-meta-value">{project.reconstructedImages}</span>
+                    </div>
+                  )}
                 </div>
 
                 <div style="margin-top: 1.25rem;">
@@ -318,6 +332,47 @@ const title = 'Tom Finn — Drone Mapping & Field Operations';
       object-fit: cover;
     }
 
+    .project-card-featured {
+      grid-column: 1 / -1;
+      border-color: var(--color-accent);
+      box-shadow: var(--shadow-md);
+    }
+
+    .project-card-featured .project-thumb {
+      aspect-ratio: 16 / 10;
+    }
+
+    .project-card-featured .project-thumb img {
+      object-fit: contain;
+    }
+
+    .project-featured-label {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      z-index: 1;
+      padding: 0.45rem 0.75rem;
+      border-radius: 999px;
+      background: var(--color-accent);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      box-shadow: var(--shadow-md);
+    }
+
+    .project-scale-highlight {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: 0.6rem 0.9rem;
+      border-radius: var(--radius-md);
+      background: var(--color-accent-soft);
+      color: var(--color-accent-hover);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
     @media (max-width: 768px) {
       .hero-content {
         flex-direction: column;
@@ -327,6 +382,10 @@ const title = 'Tom Finn — Drone Mapping & Field Operations';
         width: 200px;
         height: 200px;
         align-self: center;
+      }
+
+      .project-card-featured .project-thumb {
+        aspect-ratio: 4 / 3;
       }
     }
   </style>
